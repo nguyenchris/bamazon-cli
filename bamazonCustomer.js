@@ -22,7 +22,7 @@ const startPurchase = () => {
             if (answer.start === 'Yes') {
                 displayProducts();
             } else if (answer.start === 'No') {
-                console.log('\nSorry to see you go!')
+                console.log('\nSorry to see you go!\n')
                 connection.end();
             }
         });
