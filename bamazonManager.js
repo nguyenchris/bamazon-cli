@@ -15,7 +15,7 @@ const listMenuOptions = () => {
         type: 'list',
         choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add to Inventory', 'Add New Product', 'Exit'],
         message: 'What would you like to do?'
-    }]
+    }];
 
     inquirer
         .prompt(options)
@@ -40,7 +40,7 @@ const listMenuOptions = () => {
                     break;
             }
         });
-}
+};
 
 
 const displayContinue = () => {
