@@ -8,9 +8,9 @@ CREATE TABLE products(
 item_id INT NOT NULL AUTO_INCREMENT,
 product_name VARCHAR(150) NULL,
 department_name VARCHAR(150) NULL,
-price DECIMAL(10,2) NULL,
-stock_quantity INT NULL DEFAULT 0,
-product_sales DECIMAL(12,2) DEFAULT 0.00,
+price DECIMAL(40,2) DEFAULT 0.00,
+stock_quantity INT DEFAULT 0,
+product_sales DECIMAL(40,2) DEFAULT 0.00,
 PRIMARY KEY (item_id)
 );
 
@@ -29,14 +29,14 @@ VALUES ('LEGOS', 'Toys', 9.99, 2),
 CREATE TABLE departments(
 department_id INT NOT NULL AUTO_INCREMENT,
 department_name VARCHAR(150) NOT NULL,
-over_head_costs DECIMAL(12,2) NULL,
+over_head_costs DECIMAL(40,2) DEFAULT 0.00,
 PRIMARY KEY(department_id)
 );
 
 INSERT INTO departments (department_name, over_head_costs)
-VALUES ('Toys', 5000),
-('Electronics', 100000),
-('Appliances', 2500),
-('Jewelry', 800),
-('Cosmetics', 10000),
-('Clothing', 250);
+VALUES ('Toys', 5000.00),
+('Electronics', 100000.00),
+('Appliances', 2500.00),
+('Jewelry', 800.00),
+('Cosmetics', 10000.00),
+('Clothing', 250.00);
