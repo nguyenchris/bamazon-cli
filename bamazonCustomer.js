@@ -80,7 +80,7 @@ const askForPurchase = () => {
 // Make a query for the product the user chooses to purchase
 // Update database product quantity depending on product chosen
 const queryForProduct = (product) => {
-    const qtyInt = parseInt(product.qty)
+    const qtyInt = parseInt(product.qty);
     const q = 'SELECT product_name, department_name, price, stock_quantity, product_sales FROM products WHERE ?';
     connection.query(q, {
         item_id: product.productId
@@ -88,6 +88,7 @@ const queryForProduct = (product) => {
         if (res.length === 0) {
             console.log(`\nThere is not a product for ID: ${product.productId}\n`);
         } else if (res[0].stock_quantity >= qtyInt) {
+            console.log(res[0].product_sales);
             const finalStock = res[0].stock_quantity - qtyInt;
             const totalPrice = parseFloat(Math.round(res[0].price * qtyInt * 100) / 100).toFixed(2);
             const query = 'UPDATE products SET ? WHERE ?';
