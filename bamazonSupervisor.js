@@ -12,7 +12,7 @@ const listMenuOptions = () => {
   const options = [{
     name: 'choice',
     type: 'list',
-    choices: ['View Product Sales by Department', 'Create New Department'],
+    choices: ['View Product Sales by Department', 'Create New Department', 'Exit'],
     message: 'What would you like to do?'
   }];
 
@@ -20,9 +20,11 @@ const listMenuOptions = () => {
     .prompt(options)
     .then(answer => {
       if (answer.choice === 'View Product Sales by Department') {
-        viewProductSalesByDept()
+        viewProductSalesByDept();
       } else if (answer.choice === 'Create New Department') {
-
+        createNewDept();
+      } else {
+        connection.end();
       }
     });
 };
@@ -32,8 +34,7 @@ const viewProductSalesByDept = () => {
   SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales)
   FROM products LEFT JOIN departments ON(departments.department_name = products.department_name)
   GROUP BY departments.department_id;
-  `
-
+  `;
   const table = new Table({
     head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit'],
     colWidths: [17, 17, 17, 17, 17]
@@ -50,10 +51,10 @@ const viewProductSalesByDept = () => {
       } else {
         profit = 0;
       }
-
       arrValues[4] = profit;
       table.push(arrValues);
     });
     console.log(table.toString())
+    listMenuOptions();
   });
 };

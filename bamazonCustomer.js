@@ -87,15 +87,16 @@ const queryForProduct = (product) => {
     }, (err, res) => {
         if (res.length === 0) {
             console.log(`\nThere is not a product for ID: ${product.productId}\n`);
+            startPurchase();
         } else if (res[0].stock_quantity >= qtyInt) {
-            console.log(res[0].product_sales);
             const finalStock = res[0].stock_quantity - qtyInt;
             const totalPrice = parseFloat(Math.round(res[0].price * qtyInt * 100) / 100).toFixed(2);
+            const productSalesAdded = parseFloat(totalPrice) + res[0].product_sales;
+            const productSalesInt = parseFloat(Math.round(productSalesAdded * 100) / 100).toFixed(2);
             const query = 'UPDATE products SET ? WHERE ?';
-            const updatedProductSales = parseFloat(Math.round((totalPrice + res[0].product_sales) * 100) / 100).toFixed(2);
             const queryOptions = [{
                     stock_quantity: res[0].stock_quantity - qtyInt,
-                    product_sales: updatedProductSales
+                    product_sales: productSalesInt
                 },
                 {
                     item_id: product.productId
@@ -103,13 +104,14 @@ const queryForProduct = (product) => {
             ];
             console.log(`\nYou purchased:\nProduct: ${res[0].product_name}\nDepartment: ${res[0].department_name}\nQuantity: ${qtyInt}\nTotal Price: $${totalPrice}`);
             console.log(`\nRemaining Stock Quantity: ${finalStock}\n`);
-            connection.query(query, queryOptions, (err, res) => {
+            return connection.query(query, queryOptions, (err, res) => {
                 if (err) throw err;
+                startPurchase();
             });
 
         } else {
             console.log(`\nThere's an insuffienct amount of quantity for ${res[0].product_name}!\n`);
+            startPurchase();
         }
-        startPurchase();
     });
 };
