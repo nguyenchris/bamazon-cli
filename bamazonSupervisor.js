@@ -58,3 +58,27 @@ const viewProductSalesByDept = () => {
     listMenuOptions();
   });
 };
+
+const createNewDept = () => {
+  inquirer
+    .prompt([{
+      name: 'name',
+      type: 'input',
+      message: 'What is the department name?'
+    }, {
+      name: 'costs',
+      type: 'input',
+      message: 'What are the over head costs?'
+    }])
+    .then(answer => {
+      query = `INSERT INTO departments SET ?`
+      connection.query(query, [{
+        department_name: answer.name,
+        over_head_costs: answer.costs
+      }], (err, res) => {
+        if (err) throw err;
+        console.log(`\nDepartment Added!\n`)
+        listMenuOptions();
+      });
+    });
+}
