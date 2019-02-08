@@ -46,7 +46,7 @@ const viewProductSalesByDept = () => {
       let difference = arrValues[2] - arrValues[3];
       let profit = null;
       const posOrNeg = Math.sign(difference);
-      if (!posOrNeg) {
+      if (posOrNeg == -1) {
         profit = difference * -1;
       } else {
         profit = 0;
