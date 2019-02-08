@@ -13,7 +13,7 @@ const listMenuOptions = () => {
     const options = [{
         name: 'choice',
         type: 'list',
-        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add to Inventory', 'Add New Product', 'Exit'],
+        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', 'Exit'],
         message: 'What would you like to do?'
     }];
 
